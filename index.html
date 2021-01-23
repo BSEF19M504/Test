@@ -9,7 +9,24 @@
 	<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
 	<link rel="icon" type="image/png" href="logo.jpeg">
+	
+	<script src = "jquery.js"></script>
+	<script src = "https://code.createjs.com/1.0.0/easeljs.min.js"></script>
+	
+	<script>
+		function home() {
+		  var x = document.getElementById("myHome");
+		  if (x.style.display === "none") {
+		    x.style.display = "block";
+		  }
+		}
+		function notHome() {
+		  var x = document.getElementById("myHome");
+		  x.style.display = "none";
+		}
+	</script>
 </head>
+
 
 <body>
 	<header>
@@ -18,19 +35,69 @@
       
 		<nav>
 			<ul>
-				<li><a href="#">HOME</a></li>
-				<li><a href="#">ARTICLES</a></li>
-				<li><a href="#">DOWNLOADS</a></li>
-				<li><a href="#">ABOUT US</a></li>
+				<li><a href="#" onclick="home(); return false;">HOME</a></li>
+				<li><a href="#" onclick="notHome(); return false;">ARTICLES</a></li>
+				<li><a href="#" onclick="notHome(); return false;">DOWNLOADS</a></li>
+				<li><a href="#" onclick="notHome(); return false;">ABOUT US</a></li>
 			</ul>
 		</nav>
     </header>
 	<main>
+		<canvas id="bann" height="120px" ></canvas>
+			
 		<section class="home-banner">
 			<div class="vertical-center">
 				<h2>HighTech Tutorials<h2>
 			</div>
 		</section>
+	    <script>
+			
+			function responsiveCanvas(target){
+			  $(bann).each(function(e){
+			
+			    var parentWidth = $(this).parent().outerWidth();
+			    var parentHeight =  $(this).parent().outerHeight();
+			    $(this).attr('width', parentWidth);
+			    $(this).attr('height', parentHeight);
+			    console.log(parentWidth);
+			  })
+			
+			}
+			function update(){
+				var c = document.getElementById("bann");
+			    var ctx = c.getContext("2d");
+				var grd = ctx.createLinearGradient(60, c.width / 4, 0, 0);
+				grd.addColorStop(0, "#00058a");
+				grd.addColorStop(1, "#5e9cff");
+				ctx.fillStyle = grd;
+				ctx.fillRect(0, 0, c.width, c.height);
+				ctx.font = "45px Lobster";
+				ctx.fillStyle = "white";
+				ctx.textAlign = "center";
+				ctx.fillText("HighTech Tutorials", c.width / 2, c.height / 2);
+			}
+			
+			$(window).resize(function(){
+			  responsiveCanvas(); //every resizing
+			  update();
+			  var stage = new createjs.Stage("bann");
+			  stage.update(); //update the canvas, stage is object of easeljs
+			
+			});
+			$(document).ready(function(){
+			  responsiveCanvas(); //every resizing
+			  update();
+			  var stage = new createjs.Stage("bann");
+			  stage.update(); //update the canvas, stage is object of easeljs
+			
+			});
+			setInterval(update, 100 / 12);
+			
+	        
+	    </script>
+		
+		<div id="myHome">
+		</div>
 	
 	
 	</main>
