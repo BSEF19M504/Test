@@ -78,13 +78,23 @@
 				base_image.onload = function(){
 					ctx.drawImage(base_image, 0, 0);
 				}
-					
-					ctx.font = f + "px Lobster";
-					ctx.fillStyle = "white";
-					ctx.textAlign = "center";
-					ctx.fillText("HighTech Tutorials", c.width / 2, c.height / 2);
-					if(f<65)
-					f++;
+				ctx.font = f + "px Lobster";
+				ctx.fillStyle = "white";
+				ctx.textAlign = "center";
+				ctx.fillText("HighTech Tutorials", c.width / 2, c.height / 2);
+				var w = $(this).parent().outerWidth();
+				var l = 0;
+				console.log(w);
+				if(w < 768)
+				{
+					l = 45;
+				}
+				else
+				{
+					l = 65;
+				}
+				if(f<l)
+				f++;
 			}
 			$(window).resize(function(){
 			  responsiveCanvas(); //every resizing
