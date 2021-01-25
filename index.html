@@ -61,37 +61,48 @@
 			    $(this).attr('height', parentHeight);
 			    console.log(parentWidth);
 			  })
-			
 			}
-			function update(){
+			var f=05;
+			function updateBanner()
+			{
+				
 				var c = document.getElementById("bann");
-			    var ctx = c.getContext("2d");
-				var grd = ctx.createLinearGradient(60, c.width / 4, 0, 0);
-				grd.addColorStop(0, "#00058a");
-				grd.addColorStop(1, "#5e9cff");
-				ctx.fillStyle = grd;
-				ctx.fillRect(0, 0, c.width, c.height);
-				ctx.font = "45px Lobster";
-				ctx.fillStyle = "white";
-				ctx.textAlign = "center";
-				ctx.fillText("HighTech Tutorials", c.width / 2, c.height / 2);
+				var ctx = c.getContext("2d");
+				//var grd = ctx.createLinearGradient(60, c.width / 4, 0, 0);
+				//grd.addColorStop(0, "#0006bd");
+				//grd.addColorStop(1, "#5e9cff");
+				//ctx.fillStyle = grd;
+				//ctx.fillRect(0, 0, c.width, c.height);
+				base_image = new Image();
+				base_image.src = 'https://images.pexels.com/photos/3689659/pexels-photo-3689659.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940';
+				base_image.onload = function(){
+					ctx.drawImage(base_image, 0, 0);
+				}
+					
+					ctx.font = f + "px Lobster";
+					ctx.fillStyle = "white";
+					ctx.textAlign = "center";
+					ctx.fillText("HighTech Tutorials", c.width / 2, c.height / 2);
+					if(f<65)
+					f++;
 			}
-			
 			$(window).resize(function(){
 			  responsiveCanvas(); //every resizing
-			  update();
+			  updateBanner();
 			  var stage = new createjs.Stage("bann");
 			  stage.update(); //update the canvas, stage is object of easeljs
 			
 			});
 			$(document).ready(function(){
 			  responsiveCanvas(); //every resizing
-			  update();
+			  updateBanner();
 			  var stage = new createjs.Stage("bann");
 			  stage.update(); //update the canvas, stage is object of easeljs
 			
 			});
-			setInterval(update, 100 / 12);
+			
+			setInterval(updateBanner, 100 / 12);
+			
 			
 	        
 	    </script>
